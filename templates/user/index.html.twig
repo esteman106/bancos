@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Registro
+{% endblock %}
+
+{% block body %}
+<div class="container-scroller">
+    <div class="container-fluid">
+         <div class="row">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center">
+                <div class="card col-lg-4 offset-lg-4">
+                    <div class="card-block">
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                            <div id="mensaje" class="alert alert-{{ label }}" role="alert">
+                                <i class="fa fa-info-circle fa-lg"></i>&nbsp;{{ message }}
+                                <a href="#" id="cerrar-mensaje" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="card-block">
+                        <h3 class="card-title text-primary text-left mb-5 mt-4">Registrate</h3>
+                            {{ form(registro_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

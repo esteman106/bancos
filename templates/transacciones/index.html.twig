@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Transacciones
+{% endblock %}
+
+{% block content %}
+    <h3 class="text-primary mb-4">{{ titleh3 }}</h3>
+    <div class="row mb-4">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div id="mensaje" class="alert alert-{{ label }}" role="alert">
+                    <i class="fa fa-info-circle fa-lg"></i>&nbsp;{{ message }}&nbsp;
+                    <a href="#" id="cerrar-mensaje" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-block">
+                    <button type="button" onclick="window.location.href='{{ path('transaccion_propias') }}'" class="btn btn-outline-success btn-lg"><i class="fa fa-institution"> Tranferir entre cuentas</i> </button>
+                    <button type="button" onclick="window.location.href='{{ path('transaccion_terceros') }}'" class="btn btn-success btn-lg"><i class="fa fa-money"> Tranferir a otras cuentas</i> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-block">
+                    <h5 class="card-title mb-4">Historico de Transferencias</h5>
+                    <div class="table-responsive">
+                        <table class="table center-aligned-table">
+                            <thead>
+                            <tr class="text-primary">
+                                <th>Origen</th>
+                                <th>Destino</th>
+                                <th>Monto</th>
+                                <th>Fecha</th>
+                            </tr>
+                            </thead>
+
+                        </table>
+                        {# display navigation #}
+                        <div class="navigation">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

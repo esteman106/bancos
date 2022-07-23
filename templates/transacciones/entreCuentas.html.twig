@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Dashboard
+{% endblock %}
+
+{% block content %}
+    <h3 class="text-primary mb-4">{{ titleh3 }}</h3>
+    <div class="row mb-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-block">
+                    <form class="forms-sample" action="{{ path('store_transaccion') }}" method="post">
+                        <input type="hidden" name="token" value="{{ csrf_token('transaccion') }}">
+                        <input type="hidden" name="evento" value="1">
+                        <div class="form-group">
+                            <label>Cuenta Origen <em>*</em></label>
+                            <select class="form-control" name="origen" required>
+                                <option value="0" selected>Seleccione una de las cuentas...</option>
+                                {% for cuentas in listCuentas %}
+                                    <option value="{{ cuentas.id }}">{{ cuentas.NumCuenta }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cuenta Destino <em>*</em></label>
+                            <select class="form-control" name="destino" required>
+                                <option value="0" selected>Seleccione una de las cuentas...</option>
+                                {% for cuentas in listCuentas %}
+                                    <option value="{{ cuentas.id }}">{{ cuentas.NumCuenta }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Monto <em>*</em></label>
+                            <input type="text" name="monto" class="form-control p-input" maxlength="15" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Transferir</button>
+                            <button type="button" onclick="window.location.href='{{ path('app_transacciones') }}'" class="btn btn-danger">Cancelar</button>
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

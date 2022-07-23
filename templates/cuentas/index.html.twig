@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Cuentas
+{% endblock %}
+
+{% block content %}
+    <h3 class="text-primary mb-4">{{ titleh3 }}</h3>
+    <div class="row mb-4">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div id="mensaje" class="alert alert-{{ label }}" role="alert">
+                    <i class="fa fa-info-circle fa-lg"></i>&nbsp;{{ message }}&nbsp;
+                    <a href="#" id="cerrar-mensaje" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-block">
+                    <button type="button" onclick="window.location.href='{{ path('add_cuenta') }}'" class="btn btn-primary btn-lg"><i class="fa fa-plus"> Agregar Cuenta</i> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-block">
+                    <h5 class="card-title mb-4">Listado de Cuentas</h5>
+                    <div class="table-responsive">
+                        <table class="table center-aligned-table">
+                            <thead>
+                            <tr class="text-primary">
+                                <th>Num Cuenta</th>
+                                <th>Apodo</th>
+                                <th>Saldo</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            {# table body #}
+                            {% for cuentas in pagination %}
+                                <tr {% if loop.index is odd %}class=""{% endif %}>
+                                    <td>{{ cuentas.numCuenta }}</td>
+                                    <td>{{ cuentas.nickname }}</td>
+                                    <td>{{ cuentas.saldo }}</td>
+                                    <td><a href="{{ path('disable_account',{id:cuentas.id}) }}" title="Desactivar"><i class="fa fa-times-circle fa-lg"></i></a>&nbsp;&nbsp;</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        {# display navigation #}
+                        <div class="navigation">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

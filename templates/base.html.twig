@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Bancos - {% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/perfect-scrollbar.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" />
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('js/tether.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
+        <script src="{{ asset('js/misc.js') }}"></script>
+        <script src="{{ asset('js/control-eventos.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class=" container-scroller">
+        <nav class="navbar bg-primary-gradient col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
+            <div class="bg-white text-center navbar-brand-wrapper">
+                <a class="navbar-brand brand-logo" href="{{ path('app_dashboard') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+                <a class="navbar-brand brand-logo-mini" href="{{ path('app_dashboard') }}"><img src="{{ asset('img/logo_icon.png') }}" alt=""></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+                <button class="navbar-toggler navbar-toggler hidden-md-down align-self-center mr-3" type="button" data-toggle="minimize">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form class="form-inline mt-2 mt-md-0 hidden-md-down">
+                    <input class="form-control mr-sm-2 search" type="text" placeholder="Buscar">
+                </form>
+                <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{{ asset('img/perfil_default.jpg') }}" alt=""></a>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right hidden-lg-up align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <nav class="bg-white sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
+                    <div class="user-info">
+                        <img src="{{ asset('img/perfil_default.jpg') }}" alt="">
+                        <p class="name">{{ nameUser }}</p>
+                        <p class="designation"></p>
+                        <span class="online"></span>
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_transacciones') }}">
+                                <i class="fa fa-building"></i>
+                                <span class="menu-title">Transacciones</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fa fa-users"></i><span class="menu-title">Cuentas<i class="fa fa-sort-down"></i></span>
+                            </a>
+                            <div class="collapse" id="collapseExample">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('app_cuentas') }}">
+                                            <i class="fa fa-user-circle"></i> Propias
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('cuentas_terceros') }}">
+                                            <i class="fa fa-address-card"></i> De terceros
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">
+                                <i class="fa fa-power-off"></i>
+                                <span class="menu-title">Salir</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="content-wrapper">
+                    <h3 class="text-primary mb-4"></h3>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                {% block footer %}
+                    <footer class="footer">
+                        <div class="container-fluid clearfix">
+	                        <span class="float-right">
+	                          <a href="https://twitter.com/esteman106">Esteman106</a></span>
+                        </div>
+                    </footer>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

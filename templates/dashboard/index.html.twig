@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Dashboard
+{% endblock %}
+
+{% block content %}
+
+    <h3 class="text-primary mb-4">{{ titleh3 }}</h3>
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title font-weight-normal text-success">Saldo: {{ saldo }} COP</h4>
+                    <p class="card-text">Cuenta numero: {{ account }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-block">
+                    <h5 class="card-title mb-4">Procesos Rapidos</h5>
+                    <button type="button" onclick="window.location.href='{{ path('transaccion_propias') }}'"class="btn btn-outline-success"><i class="fa fa-institution"></i>&nbsp;Transferir Cuentas Propias</button>
+                    <button type="button" onclick="window.location.href='{{ path('transaccion_terceros') }}'"class="btn btn-success"><i class="fa fa-money"></i>&nbsp;Transferir a Terceros</button>
+                    <button type="button" onclick="window.location.href='{{ path('add_cuenta') }}'" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Cuenta Propia</button>
+                    <button type="button" onclick="window.location.href='{{ path('add_cuentater') }}'" class="btn btn-warning"><i class="fa fa-plus"></i>&nbsp;Cuenta de Terceros</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
