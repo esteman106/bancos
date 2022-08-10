@@ -43,4 +43,11 @@ class TransaccionesRepository extends ServiceEntityRepository
         return $this->getEntityManager()->createQuery('SELECT p.id,p.num_cuenta FROM App:Transacciones p WHERE p.user_id = :id_usr')->setParameter('id_usr', $usrId);
     }
 
+    public function listadoTransacciones($id){
+        return $this->getEntityManager()->createQuery('SELECT t.monto,t.created_at, c.num_cuenta AS origen, d.num_cuenta AS destino
+            FROM App:Transacciones t
+            INNER JOIN t.cuenta_origen c INNER JOIN t.cuenta_destino d
+            WHERE t.user = :user')->setParameter('user', $id);
+    }
+
 }
