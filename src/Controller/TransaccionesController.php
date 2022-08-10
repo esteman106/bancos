@@ -7,6 +7,7 @@ use App\Entity\Terceros;
 use App\Entity\Transacciones;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +23,19 @@ class TransaccionesController extends AbstractController
     }
 
     #[Route('/transacciones', name: 'app_transacciones')]
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $idUsr = $this->getUser();
+        $objUser = $this->em->getRepository(Transacciones::class)->listadoTransacciones($idUsr);
+        $pagination = $paginator->paginate(
+            $objUser,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('transacciones/index.html.twig', [
             'nameUser' =>  self::nombreUsuario($idUsr),
             'titleh3' => 'Transacciones',
+            'pagination' => $pagination,
         ]);
     }
 
