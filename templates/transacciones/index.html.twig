@@ -41,11 +41,19 @@
                                 <th>Fecha</th>
                             </tr>
                             </thead>
-
+                            {# table body #}
+                            {% for transacciones in pagination %}
+                                <tr {% if loop.index is odd %}class=""{% endif %}>
+                                    <td>{{ transacciones.origen }}</td>
+                                    <td>{{ transacciones.destino }}</td>
+                                    <td>{{ transacciones.monto}}</td>
+                                    <td>{{ transacciones.created_at|date("Y-m-d H:i:s") }}</td>
+                                </tr>
+                            {% endfor %}
                         </table>
                         {# display navigation #}
                         <div class="navigation">
-
+                            {{ knp_pagination_render(pagination) }}
                         </div>
                     </div>
                 </div>
